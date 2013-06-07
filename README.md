@@ -56,6 +56,21 @@ We can also use logical expressions like so:
 {% endif %}
 ```
 
+## Magic Auth Tag
+
+Simply add the auth script tag and the auth action and account tags and our system will know if you logged in or out and will be able to link to your account!
+
+The script tag sets up an ajax callback to the server to determine if we are online or offline.
+`{% attendease_auth_script %}`
+
+This is simple a div with the id `attendease-auth-account`, maybe more in the future. When used with the `attendease_auth_script` tag it will populate with the link to the account of the attendee.
+
+`{% attendease_auth_account %}`
+
+This is simple a div with the id `attendease-auth-action`, maybe more in the future. When used with the `attendease_auth_script` tag it will populate with a `login` or `logout` action.
+
+`{% attendease_auth_action %}`
+
 ## Contributing
 
 1. Fork it
@@ -64,6 +79,17 @@ We can also use logical expressions like so:
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## Testing
+
+During development, you can create and install local builds:
+
+`gem build jekyll-attendease.gemspec`
+
+And then install it:
+
+`gem install jekyll-attendease-``cat jekyll-attendease.gemspec|grep s.version|awk '{print $3}'|sed s/\'//g```
+
+(where `x.x.x` is the version you've defined in the gemspec)
 
 ## License
 
