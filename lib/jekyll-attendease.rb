@@ -36,7 +36,7 @@ module Jekyll
             update_data = true
 
             if File.exists?("#{@attendease_data_path}/site.json")
-              if (Time.now.to_i - File.mtime("#{@attendease_data_path}/site.json").to_i) <= 30 # file is less than 30 seconds old
+              if (Time.now.to_i - File.mtime("#{@attendease_data_path}/site.json").to_i) <= (@attendease_config['cache_expiry'].nil? ? 30 : @attendease_config['cache_expiry'])  # file is less than 30 seconds old
                 update_data = false
 
                 site_json = File.read("#{@attendease_data_path}/site.json")
@@ -221,6 +221,8 @@ layout: layout
 
     class AttendeaseAuthScriptTag < Liquid::Tag
       def render(context)
+        @attendease_data_path = "#{context['site']['source']}/_attendease_data"
+
         content = <<-eos
 <script type="text/javascript">
 function handleAuthState()
@@ -251,10 +253,7 @@ function handleAuthState()
   }
 }
 
-document.addEventListener('DOMContentLoaded',function(){
-  handleAuthState();
-});
-
+document.addEventListener('DOMContentLoaded', handleAuthState);
 </script>
         eos
 
