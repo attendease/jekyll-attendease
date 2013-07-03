@@ -56,16 +56,19 @@ module Jekyll
                 raise "Event data not found, is your Attendease api_host site properly in _config.yml?"
               end
 
-              #pages_to_fetch = ['choose_pass', 'checkout', 'dashboard']
+              if @attendease_config['test_mode']
 
-              # Registration test pages, so we can style the forms!
-              fetch_pages ['choose_pass', 'checkout', 'dashboard'], 'register'
+                #pages_to_fetch = ['choose_pass', 'checkout', 'dashboard']
 
-              # Schedule test pages, so we can style the forms!
-              fetch_pages ['schedule', 'session', 'session_instance']
+                # Registration test pages, so we can style the forms!
+                fetch_pages ['choose_pass', 'checkout', 'dashboard'], 'register'
 
-              # Presenter test pages, so we can style the forms!
-              fetch_pages ['presenters', 'presenter']
+                # Schedule test pages, so we can style the forms!
+                fetch_pages ['schedule', 'session', 'session_instance']
+
+                # Presenter test pages, so we can style the forms!
+                fetch_pages ['presenters', 'presenter']
+              end
             end
 
             # Adding to site config so we can access these variables globally wihtout using a Liquid Tag so we can use if/else
