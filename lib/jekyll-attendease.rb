@@ -287,7 +287,11 @@ var JekyllAttendease = {
           }
           else
           {
-            document.getElementById("attendease-auth-action").innerHTML = '<a class="attendease-auth-logout" href="/attendease/login">Login</a>';
+            authActionElement = document.getElementById("attendease-auth-action");
+            if (authActionElement)
+            {
+              authActionElement.innerHTML = '<a class="attendease-auth-logout" href="/attendease/login">Login</a>';
+            }
           }
 
           data = { loggedin: this.attendease_logged_in, account: accountObject, loginURL: "/attendease/login", logoutURL: "/attendease/logout", accountURL: "/attendease/account" };
