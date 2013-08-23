@@ -228,35 +228,93 @@ layout: layout
 
         content = <<-eos
 <script type="text/javascript">
-function handleAuthState()
-{
-  var xmlhttp;
-  if (window.XMLHttpRequest)
+var JekyllAttendease = {
+
+  attendease_logged_in: false,
+
+  addEvent: function(obj, eventType, targetFunction, useCapture)
   {
-    xmlhttp=new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function()
+    if (obj.addEventListener)
     {
-      if (xmlhttp.readyState==4 && xmlhttp.status==200)
-      {
-        logout = '<a class="attendease-auth-logout" href="/attendease/logout">Logout</a>';
-        document.getElementById("attendease-auth-action").innerHTML = logout;
-
-        account = JSON.parse(xmlhttp.responseText);
-        account = '<a class="attendease-auth-account" href="/attendease/account">' + account.name + '</a>';
-        document.getElementById("attendease-auth-account").innerHTML = account;
-      }
-      else
-      {
-        login = '<a class="attendease-auth-logout" href="/attendease/login">Login</a>';
-        document.getElementById("attendease-auth-action").innerHTML = login;
-      }
+      obj.addEventListener(eventType, targetFunction, false);
     }
-    xmlhttp.open("GET","/attendease/verify_credentials.json",true);
-    xmlhttp.send();
-  }
-}
+    else if (obj.attachEvent)
+    {
+      obj.attachEvent('on' + eventType, targetFunction);
+    }
+    else
+    {
+      obj['on' + eventType] = targetFunction;
+    }
+  },
 
-document.addEventListener('DOMContentLoaded', handleAuthState);
+  onLoginCheck: function(callback) {
+    this.addEvent(document, "attendease.loggedin", callback);
+  },
+
+  isLoggedIn: function() {
+    return this.attendease_logged_in;
+  },
+
+  handleAuthState: function() {
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {
+      xmlhttp=new XMLHttpRequest();
+      xmlhttp.onreadystatechange=function()
+      {
+        if (xmlhttp.readyState==4)
+        {
+          var accountObject = false;
+
+          if (xmlhttp.status==200)
+          {
+            authActionElement = document.getElementById("attendease-auth-action");
+            if (authActionElement)
+            {
+              authActionElement.innerHTML = '<a class="attendease-auth-logout" href="/attendease/logout">Logout</a>';
+            }
+
+            accountObject = JSON.parse(xmlhttp.responseText);
+
+            authAccountElement = document.getElementById("attendease-auth-account");
+            if (authAccountElement)
+            {
+              authAccountElement.innerHTML = '<a class="attendease-auth-account" href="/attendease/account">' + accountObject.name + '</a>';
+            }
+
+            this.attendease_logged_in = true;
+          }
+          else
+          {
+            document.getElementById("attendease-auth-action").innerHTML = '<a class="attendease-auth-logout" href="/attendease/login">Login</a>';
+          }
+
+          data = { loggedin: this.attendease_logged_in, account: accountObject, loginURL: "/attendease/login", logoutURL: "/attendease/logout", accountURL: "/attendease/account" };
+
+          if (document.createEvent)
+          {
+            event = document.createEvent("HTMLEvents");
+            event.initEvent("attendease.loggedin", true, true);
+            event.data = data;
+            document.dispatchEvent(event);
+          }
+          else
+          {
+            event = document.createEventObject();
+            event.eventType = "attendease.loggedin";
+            event.memo = data;
+            document.fireEvent("on" + event.eventType, event);
+          }
+        }
+      }
+      xmlhttp.open("GET","/attendease/verify_credentials.json",true);
+      xmlhttp.send();
+    }
+  }
+};
+
+document.addEventListener('DOMContentLoaded', JekyllAttendease.handleAuthState);
 </script>
         eos
 
