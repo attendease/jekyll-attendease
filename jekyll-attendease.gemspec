@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'jekyll-attendease'
-  s.version     = '0.3.7'
-  s.date        = '2013-08-23'
+  s.version     = '0.3.8'
+  s.date        = '2013-08-29'
   s.summary     = "Attendease event helper for Jekyll"
   s.description = "Bring your event data into Jekyll for amazing event websites."
   s.authors     = ["Michael Wood", "Patrick Gibson", "Jamie Lubiner"]
   s.email       = 'support@attendease.com'
-  s.files       = ["README.md", "lib/jekyll-attendease.rb"]
+  s.files       = ["README.md", "lib/jekyll-attendease.rb", "assets/auth_check.js"]
   s.homepage    = 'https://attendease.com/'
 
   s.add_dependency 'httparty'#, '~> 0.11.0'
