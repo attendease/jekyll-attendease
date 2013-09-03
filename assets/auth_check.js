@@ -22,13 +22,13 @@ var JekyllAttendease = {
 
   onLoginCheck: function(callback)
   {
-    if (document.attachEvent)
-    {
-      this.addEvent(document, "dataavailable", callback);
-    }
-    else
+    if (document.createEvent)
     {
       this.addEvent(document, "attendease.loggedin", callback);
+    }
+    else if (document.attachEvent)
+    {
+      this.addEvent(document, "dataavailable", callback);
     }
   },
 
