@@ -16,6 +16,13 @@
       {{ page.presenter.company }}
     </div>
 
+    {% if page.presenter.social %}
+    <div class="attendease-presenter-social">
+      <a href="http://www.twitter.com/{{ page.presenter.social.twitter | remove_first:'@' }}" target="_blank">Twitter</a>
+      <a href="http://www.facebook.com/{{ page.presenter.social.facebook }}" target="_blank">Facebook</a>
+    </div>
+    {% endif %}
+
     <div class="attendease-presenter-bio">
       {{ page.presenter.bio | markdownify }}
     </div>
