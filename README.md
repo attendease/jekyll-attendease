@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/attendease/jekyll-attendease.png?label=ready&title=Ready)](https://waffle.io/attendease/jekyll-attendease)
 # Jekyll::Attendease
 
 A Jekyll plugin, brings in data from your Attendease event and allows you to use it in your Jekyll templates for awesome event websites.
