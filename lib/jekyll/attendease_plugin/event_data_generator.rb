@@ -92,6 +92,7 @@ module Jekyll
                 if file_name == 'site.json'
                   # Adding to site config so we can access these variables globally wihtout using a Liquid Tag so we can use if/else
                   site.config['attendease']['data'] = {}
+                  site.config['attendease']['data']['core'] = {}
 
                   data.keys.each do |tag|
                     site.config['attendease']['data'][tag] = data[tag]
@@ -104,7 +105,8 @@ module Jekyll
                     # TODO: update all themes to not use attendease_ variables
                     #       and then retire them from the ThemeManager.
                     if tag.match(/^attendease_/)
-                      site.config['attendease']['data'][tag.gsub(/^attendease_/, '')] = data[tag]
+                      # only set keys that aren't already defined from the theme
+                      site.config['attendease']['data']['core'][tag.gsub(/^attendease_/, '')] = data[tag]
                     end
                   end
                 end
