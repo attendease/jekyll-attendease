@@ -3,6 +3,17 @@ module Jekyll
     class OrganizationDataGenerator < EventDataGenerator
       priority :highest
 
+      include HTTParty
+
+      def get(url, options = {})
+        begin
+          self.class.get(url, options)
+        rescue => e
+          Jekyll.logger.error "Could not connect to #{url}."
+          puts e.inspect
+        end
+      end
+
       def generate(site)
         return unless site.config.organization? && site.config.cms_theme?
 
