@@ -52,6 +52,7 @@ RSpec.describe Jekyll::AttendeasePlugin::EventDataGenerator do
       expect(site.data['site_settings'].class).to eq(Hash)
       expect(site.data['site_settings']['look_and_feel']['body_font_family']).to eq('serif')
     end
+
   end
 
   context 'new cms site' do
@@ -83,6 +84,11 @@ RSpec.describe Jekyll::AttendeasePlugin::EventDataGenerator do
     it 'populates a site wide portal pages array' do
       expect(site.data['portal_pages'].class).to eq(Array)
       expect(site.data['portal_pages'].length).to eq(2)
+    end
+
+    it 'populates a site wide portal published object' do
+      expect(site.data['portal_published'].class).to eq(Hash)
+      expect(site.data['portal_published']['portal_published']).to eq(true)
     end
 
   end
