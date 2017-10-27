@@ -193,6 +193,8 @@ _EOT
           case env
           when 'development'
             url = '//dashboard.localhost.attendease.com/webpack_assets/blockrenderer.bundle.js'
+          when 'prerelease'
+            url = '//cdn.attendease.com/blockrenderer/prerelease-latest.js'
           when 'preview'
             url = '//cdn.attendease.com/blockrenderer/ci-latest.js'
           else
