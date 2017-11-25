@@ -192,18 +192,23 @@ _EOT
         else
           case env
           when 'development'
-            url = '//dashboard.localhost.attendease.com/webpack_assets/blockrenderer.bundle.js'
+            url = '//dashboard.localhost.attendease.com/webpack_assets/block-renderer.bundle.js'
+            style_url = '//dashboard.localhost.attendease.com/webpack_assets/block-renderer.bundle.css'
           when 'prerelease'
             url = '//cdn.attendease.com/blockrenderer/prerelease-latest.js'
+            style_url = '//cdn.attendease.com/blockrenderer/prerelease-latest.css'
           when 'preview'
             url = '//cdn.attendease.com/blockrenderer/ci-latest.js'
+            style_url = '//cdn.attendease.com/blockrenderer/ci-latest.css'
           else
-            url = '//dashboard.attendease.com/webpack_assets/blockrenderer.bundle.js'
+            url = '//cdn.attendease.com/blockrenderer/latest.js'
+            style_url = '//cdn.attendease.com/blockrenderer/latest.css'
           end
         end
 
         script << <<_EOT
 <script type="text/javascript" src="#{ url }"></script>
+<link rel="stylesheet" type="text/css" href="#{style_url}" />
 _EOT
 
         script
