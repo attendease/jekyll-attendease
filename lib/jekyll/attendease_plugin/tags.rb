@@ -167,7 +167,8 @@ module Jekyll
     authApiEndpoint: "#{ config['auth_host'] }api",
     orgLocales: #{ config['available_portal_locales'] },
     features: #{ config['features'].to_json },
-    pages: #{ pages.to_json }
+    pages: #{ pages.to_json },
+    siteSettings: #{context.registers[:site].data['site_settings'].to_json}
   }
 })(window)
 </script>
@@ -186,7 +187,8 @@ _EOT
     privateSite: #{ config['private_site'] },
     authApiEndpoint: "#{ config['auth_host'] }api",
     features: #{ config['features'].to_json },
-    pages: #{ pages.to_json }
+    pages: #{ pages.to_json },
+    siteSettings: #{context.registers[:site].data['site_settings'].to_json}
   }
 })(window)
 </script>
