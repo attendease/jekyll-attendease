@@ -151,6 +151,7 @@ module Jekyll
 
       def render(context)
         config = context.registers[:site].config['attendease']
+        pages = context.registers[:site].data['pages']
         #data = context.registers[:site].data
         env = config['environment']
 
@@ -165,7 +166,8 @@ module Jekyll
     privateSite: #{ config['private_site'] },
     authApiEndpoint: "#{ config['auth_host'] }api",
     orgLocales: #{ config['available_portal_locales'] },
-    features: #{ config['features'].to_json }
+    features: #{ config['features'].to_json },
+    pages: #{ pages.to_json }
   }
 })(window)
 </script>
@@ -183,7 +185,8 @@ _EOT
     orgId: "#{ config['organization_id'] }",
     privateSite: #{ config['private_site'] },
     authApiEndpoint: "#{ config['auth_host'] }api",
-    features: #{ config['features'].to_json }
+    features: #{ config['features'].to_json },
+    pages: #{ pages.to_json }
   }
 })(window)
 </script>
