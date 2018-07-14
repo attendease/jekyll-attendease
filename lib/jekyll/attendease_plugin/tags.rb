@@ -154,6 +154,7 @@ module Jekyll
         pages = context.registers[:site].data['pages']
         portal_pages = context.registers[:site].data['portal_pages']
         organization_name = context.registers[:site].config['attendease']['organization_name']
+        parent_pages_are_clickable = context.registers[:site].config['attendease']['parent_pages_are_clickable']
 
         env = config['environment']
 
@@ -172,7 +173,8 @@ module Jekyll
     pages: #{ pages.to_json },
     siteSettings: #{context.registers[:site].data['site_settings'].to_json},
     portal_pages: #{ portal_pages.to_json },
-    organizationName: #{organization_name.to_json}
+    organizationName: #{organization_name.to_json},
+    parentPagesAreClickable: #{parent_pages_are_clickable}
   }
 })(window)
 </script>
@@ -194,7 +196,8 @@ _EOT
     pages: #{ pages.to_json },
     siteSettings: #{context.registers[:site].data['site_settings'].to_json},
     portal_pages: #{ portal_pages.to_json },
-    organizationName: #{organization_name.to_json}
+    organizationName: #{organization_name.to_json},
+    parentPagesAreClickable: #{parent_pages_are_clickable}
   }
 })(window)
 </script>
