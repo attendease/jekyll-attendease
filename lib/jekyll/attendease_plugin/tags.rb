@@ -152,7 +152,9 @@ module Jekyll
       def render(context)
         config = context.registers[:site].config['attendease']
         pages = context.registers[:site].data['pages']
-        #data = context.registers[:site].data
+        portal_pages = context.registers[:site].data['portal_pages']
+        organization_name = context.registers[:site].config['attendease']['organization_name']
+
         env = config['environment']
 
         if config['mode'] == 'organization'
@@ -168,7 +170,9 @@ module Jekyll
     orgLocales: #{ config['available_portal_locales'] },
     features: #{ config['features'].to_json },
     pages: #{ pages.to_json },
-    siteSettings: #{context.registers[:site].data['site_settings'].to_json}
+    siteSettings: #{context.registers[:site].data['site_settings'].to_json},
+    portal_pages: #{ portal_pages.to_json },
+    organizationName: #{organization_name.to_json}
   }
 })(window)
 </script>
@@ -188,7 +192,9 @@ _EOT
     authApiEndpoint: "#{ config['auth_host'] }api",
     features: #{ config['features'].to_json },
     pages: #{ pages.to_json },
-    siteSettings: #{context.registers[:site].data['site_settings'].to_json}
+    siteSettings: #{context.registers[:site].data['site_settings'].to_json},
+    portal_pages: #{ portal_pages.to_json },
+    organizationName: #{organization_name.to_json}
   }
 })(window)
 </script>
