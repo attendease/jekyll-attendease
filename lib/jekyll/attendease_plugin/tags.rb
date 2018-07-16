@@ -174,7 +174,7 @@ module Jekyll
     siteSettings: #{context.registers[:site].data['site_settings'].to_json},
     portal_pages: #{ portal_pages.to_json },
     organizationName: #{organization_name.to_json},
-    parentPagesAreClickable: #{parent_pages_are_clickable}
+    parentPagesAreClickable: #{!!parent_pages_are_clickable}
   }
 })(window)
 </script>
@@ -197,7 +197,7 @@ _EOT
     siteSettings: #{context.registers[:site].data['site_settings'].to_json},
     portal_pages: #{ portal_pages.to_json },
     organizationName: #{organization_name.to_json},
-    parentPagesAreClickable: #{parent_pages_are_clickable}
+    parentPagesAreClickable: #{!!parent_pages_are_clickable}
   }
 })(window)
 </script>

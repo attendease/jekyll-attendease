@@ -12,10 +12,10 @@ Gem::Specification.new do |s|
   s.email         = 'support@attendease.com'
   s.files         = (Dir.glob('lib/**/*.{rb,yaml}') + Dir.glob('templates/**/*.html'))
   s.test_files    = Dir.glob('spec/**/*.rb').grep(/^(test|spec|features)\//)
-  s.require_paths = [ 'lib' ]
+  s.require_paths = ['lib']
 
   s.homepage    = 'https://attendease.com/'
-  s.licenses    = [ 'MIT' ]
+  s.licenses    = ['MIT']
 
   s.add_runtime_dependency 'httparty',  '~> 0.13'
   s.add_runtime_dependency 'json',      '~> 1.8'
