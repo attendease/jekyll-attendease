@@ -161,6 +161,8 @@ module Jekyll
                   context.registers[:site].data['pages']
                 end
 
+        pages = pages.reject { |page| page['hidden'] }.sort_by { |page| page['weight'] }
+
         env = config['environment']
 
         if config['mode'] == 'organization'
@@ -176,7 +178,7 @@ module Jekyll
     orgLocales: #{ config['available_portal_locales'] },
     features: #{ config['features'].to_json },
     pages: #{ pages.to_json },
-    parentPagesAreClickable: #{!!parent_pages_are_clickable}
+    settings: { parentPagesAreClickable: #{!!parent_pages_are_clickable} }
   }
 })(window)
 </script>
@@ -196,7 +198,7 @@ _EOT
     authApiEndpoint: "#{ config['auth_host'] }api",
     features: #{ config['features'].to_json },
     pages: #{ pages.to_json },
-    parentPagesAreClickable: #{!!parent_pages_are_clickable}
+    settings: { parentPagesAreClickable: #{!!parent_pages_are_clickable} }
   }
 })(window)
 </script>
