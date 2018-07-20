@@ -151,10 +151,15 @@ module Jekyll
 
       def render(context)
         config = context.registers[:site].config['attendease']
-        pages = context.registers[:site].data['pages']
-        portal_pages = context.registers[:site].data['portal_pages']
-        organization_name = context.registers[:site].config['attendease']['organization_name']
-        parent_pages_are_clickable = context.registers[:site].config['attendease']['parent_pages_are_clickable']
+
+        parent_pages_are_clickable = config['parent_pages_are_clickable']
+        site_settings = context.registers[:site].data['site_settings']
+
+        pages = if site_settings['advanced'] && site_settings['advanced']['portal_pages_in_the_event_website']
+                  context.registers[:site].data['portal_pages']
+                else
+                  context.registers[:site].data['pages']
+                end
 
         env = config['environment']
 
@@ -171,9 +176,6 @@ module Jekyll
     orgLocales: #{ config['available_portal_locales'] },
     features: #{ config['features'].to_json },
     pages: #{ pages.to_json },
-    siteSettings: #{context.registers[:site].data['site_settings'].to_json},
-    portal_pages: #{ portal_pages.to_json },
-    organizationName: #{organization_name.to_json},
     parentPagesAreClickable: #{!!parent_pages_are_clickable}
   }
 })(window)
@@ -194,9 +196,6 @@ _EOT
     authApiEndpoint: "#{ config['auth_host'] }api",
     features: #{ config['features'].to_json },
     pages: #{ pages.to_json },
-    siteSettings: #{context.registers[:site].data['site_settings'].to_json},
-    portal_pages: #{ portal_pages.to_json },
-    organizationName: #{organization_name.to_json},
     parentPagesAreClickable: #{!!parent_pages_are_clickable}
   }
 })(window)
