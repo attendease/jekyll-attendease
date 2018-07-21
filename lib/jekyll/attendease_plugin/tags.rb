@@ -151,17 +151,30 @@ module Jekyll
 
       def render(context)
         config = context.registers[:site].config['attendease']
-
-        parent_pages_are_clickable = config['parent_pages_are_clickable']
         site_settings = context.registers[:site].data['site_settings']
+        parent_pages_are_clickable = config['parent_pages_are_clickable']
 
-        pages = if site_settings['advanced'] && site_settings['advanced']['portal_pages_in_the_event_website']
-                  context.registers[:site].data['portal_pages']
-                else
-                  context.registers[:site].data['pages']
-                end
+        page_data_source = if site_settings['advanced'] && site_settings['advanced']['portal_pages_in_the_event_website']
+                             'portal_pages'
+                           else
+                             'pages'
+                           end
 
-        pages = pages.reject { |page| page['hidden'] }.sort_by { |page| page['weight'] }
+        page_keys = %w[id name href weight active root children parent]
+
+        pages = context.registers[:site].data[page_data_source]
+          .reject { |p| p['hidden'] }
+          .map do |page|
+            page = page.select { |key| page_keys.include?(key) }
+
+            page['children'] = page['children']
+              .reject { |p| p['hidden'] }
+              .map { |child| child.select { |key| page_keys.include?(key) } }
+              .sort_by { |p| p['weight'] }
+
+            page
+          end
+          .sort_by { |p| p['weight'] }
 
         env = config['environment']
 

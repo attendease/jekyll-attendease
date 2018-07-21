@@ -1,5 +1,5 @@
 module Jekyll
   module AttendeasePlugin
-    VERSION = '0.6.36.pre1'
+    VERSION = '0.6.36'
   end
 end
