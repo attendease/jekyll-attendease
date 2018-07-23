@@ -82,7 +82,10 @@ RSpec.describe "Jekyll Attendease tags" do
   end
 
   context "{% attendease_block_renderer %} for event" do
-    subject { render("{% attendease_block_renderer %}") }
+    require 'pry'
+    subject {
+      render("{% attendease_block_renderer %}")
+    }
 
     it { is_expected.to match(/locale: "en"/) }
     it { is_expected.to match(/eventApiEndpoint: "https:\/\/foobar\/api"/) }

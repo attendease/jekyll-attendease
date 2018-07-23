@@ -41,7 +41,7 @@ RSpec.describe Jekyll::AttendeasePlugin::EventDataGenerator do
 
     it 'populates a site wide pages array' do
       expect(site.data['pages'].class).to eq(Array)
-      expect(site.data['pages'].length).to eq(6)
+      expect(site.data['pages'].length).to eq(7)
     end
 
     it 'populates a site wide event object' do
@@ -59,7 +59,7 @@ RSpec.describe Jekyll::AttendeasePlugin::EventDataGenerator do
 
     it 'populates a site wide pages array' do
       expect(site.data['pages'].class).to eq(Array)
-      expect(site.data['pages'].length).to eq(6)
+      expect(site.data['pages'].length).to eq(7)
     end
 
     it 'populates a site wide event object' do
