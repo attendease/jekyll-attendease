@@ -9,6 +9,9 @@ Status](https://coveralls.io/repos/attendease/jekyll-attendease/badge.svg?branch
 
 ## Changes
 
+### 0.6.37
+* Filter root pages so only root page can be listed in the navigation menu
+
 ### 0.6.36
 * Expose public pages and settings (only `parentPagesAreClickable` for now).
 

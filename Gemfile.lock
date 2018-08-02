@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-attendease (0.6.36)
+    jekyll-attendease (0.6.37)
       awesome_print
       httparty (~> 0.13)
       i18n (~> 0.6.9)
