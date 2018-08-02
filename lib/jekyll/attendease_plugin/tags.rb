@@ -163,6 +163,7 @@ module Jekyll
         page_keys = %w[id name href weight active root children parent]
 
         pages = context.registers[:site].data[page_data_source]
+          .select { |p| p['root'] }
           .reject { |p| p['hidden'] }
           .map do |page|
             page = page.select { |key| page_keys.include?(key) }
