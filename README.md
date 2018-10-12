@@ -9,6 +9,9 @@ Status](https://coveralls.io/repos/attendease/jekyll-attendease/badge.svg?branch
 
 ## Changes
 
+### 0.6.40.1
+* Don't include the general site settings (i.e. inline script code) in the block renderer tag
+
 ### 0.6.38.1
 * Expose site settings and portal pages to the event and organization websites
 

@@ -151,14 +151,16 @@ module Jekyll
 
       def render(context)
         config = context.registers[:site].config['attendease']
-        siteSettings = context.registers[:site].data['site_settings'].delete_if {|key, value| ['analytics', 'meta'].include? key }
+        siteSettings = context.registers[:site].data['site_settings'].clone
+        siteSettings.delete_if {|key, value| ['analytics', 'meta', 'general'].include? key }
 
         organizationSiteSettings = {}
         if context.registers[:site].data['organization_site_settings']
-          organizationSiteSettings = context.registers[:site].data['organization_site_settings'].delete_if {|key, value| ['analytics', 'meta'].include? key }
+          organizationSiteSettings = context.registers[:site].data['organization_site_settings'].clone
+          organizationSiteSettings.delete_if {|key, value| ['analytics', 'meta', 'general'].include? key }
         end
 
-        parent_pages_are_clickable = config['parent_pages_are_clickable']        
+        parent_pages_are_clickable = config['parent_pages_are_clickable']
 
         page_keys = %w[id name href weight active root children parent]
 
@@ -198,10 +200,10 @@ module Jekyll
 
 
         env = config['environment']
-        
-        # IMPORTANT NOTE: The script variables below must NOT be changed without making sure that blockrenderer.js and other 
+
+        # IMPORTANT NOTE: The script variables below must NOT be changed without making sure that blockrenderer.js and other
         # related code in the platform is backwards-compatible.
-        
+
         if config['mode'] == 'organization'
           script = <<_EOT
 <script type="text/javascript">
