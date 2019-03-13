@@ -168,7 +168,7 @@ module Jekyll
         pages = {}
         pages = context.registers[:site].data['pages']
           .select { |p| p['root'] }
-          .reject { |p| p['hidden'] }
+          .reject { |p| p['hidden'] && p['slug'] != '' }
           .map do |page|
             page = page.select { |key| page_keys.include?(key) }
 
@@ -185,7 +185,7 @@ module Jekyll
         if (context.registers[:site].data['portal_pages'])
           portal_pages = context.registers[:site].data['portal_pages']
             .select { |p| p['root'] }
-            .reject { |p| p['hidden'] }
+            .reject { |p| p['hidden'] && p['slug'] != '' }
             .map do |page|
               page = page.select { |key| page_keys.include?(key) }
 

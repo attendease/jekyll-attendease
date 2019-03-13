@@ -9,6 +9,10 @@ Status](https://coveralls.io/repos/attendease/jekyll-attendease/badge.svg?branch
 
 ## Changes
 
+### 0.6.43.4
+
+* Always show the Home page object even if is hidden from the Navigation
+
 ### 0.6.43.3
 
 * Bug fix to the Google Analytics and Google Ads tag
