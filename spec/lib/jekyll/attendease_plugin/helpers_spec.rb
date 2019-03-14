@@ -65,5 +65,9 @@ RSpec.describe Jekyll::AttendeasePlugin::Helpers do
     it 'only has the declared keys in each page object' do
       expect(public_pages[0].keys.length).to eq(8)
     end
+
+    it 'handles nil input' do
+      expect(Jekyll::AttendeasePlugin::Helpers.public_pages(nil)).to be_nil
+    end
   end
 end

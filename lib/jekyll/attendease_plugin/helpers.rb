@@ -38,10 +38,11 @@ module Jekyll
                  fallback: lambda { |c| fallback.key?(c) ? fallback[c] : undefined })
       end
 
-      PAGE_KEYS = %w[id name href weight root children parent hidden].freeze
+      PAGE_KEYS = %w[id name href weight root children parent hidden external].freeze
 
       # filter the raw pages for what's safe to make public
       def self.public_pages(pages)
+        return if pages.nil?
         pages
           .select { |p| p['root'] }
           .reject { |p| p['hidden'] && (p['slug'] != '' || p['external'] == true) }

@@ -82,7 +82,6 @@ module Jekyll
       end
     end
 
-    #require 'pry'
     class PortalNavigationTag < Liquid::Block
       def initialize(tag_name, params, tokens)
         super
@@ -205,6 +204,7 @@ module Jekyll
             'analytics' => analytics
         }
         end
+
         script = <<_EOT
 <script type="text/javascript">
 (function(w) {
