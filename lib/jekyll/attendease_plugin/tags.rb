@@ -163,43 +163,9 @@ module Jekyll
 
         parent_pages_are_clickable = config['parent_pages_are_clickable']
 
-        page_keys = %w[id name href weight active root children parent]
+        pages = Helpers.public_pages(context.registers[:site].data['pages'])
 
-        pages = {}
-        pages = context.registers[:site].data['pages']
-          .select { |p| p['root'] }
-          .reject { |p| p['hidden'] && p['slug'] != '' }
-          .map do |page|
-            page = page.select { |key| page_keys.include?(key) }
-
-            page['children'] = page['children']
-              .reject { |p| p['hidden'] }
-              .map { |child| child.select { |key| page_keys.include?(key) } }
-              .sort_by { |p| p['weight'] }
-
-            page
-          end
-          .sort_by { |p| p['weight'] }
-
-        portal_pages = {}
-        if (context.registers[:site].data['portal_pages'])
-          portal_pages = context.registers[:site].data['portal_pages']
-            .select { |p| p['root'] }
-            .reject { |p| p['hidden'] && p['slug'] != '' }
-            .map do |page|
-              page = page.select { |key| page_keys.include?(key) }
-
-              page['children'] = page['children']
-                .reject { |p| p['hidden'] }
-                .map { |child| child.select { |key| page_keys.include?(key) } }
-                .sort_by { |p| p['weight'] }
-
-              page
-            end
-            .sort_by { |p| p['weight'] }
-        end
-
-
+        portal_pages = Helpers.public_pages(context.registers[:site].data['portal_pages']) || []
         env = config['environment']
 
         # IMPORTANT NOTE: The script variables below must NOT be changed without making sure that blockrenderer.js and other
