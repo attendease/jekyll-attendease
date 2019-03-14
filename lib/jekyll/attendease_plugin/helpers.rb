@@ -35,7 +35,27 @@ module Jekyll
                     'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
                     'ý' => 'y', 'ÿ' => 'y' }
         s.encode('ASCII',
-        fallback: lambda { |c| fallback.key?(c) ? fallback[c] : undefined })
+                 fallback: lambda { |c| fallback.key?(c) ? fallback[c] : undefined })
+      end
+
+      PAGE_KEYS = %w[id name href weight root children parent hidden].freeze
+
+      # filter the raw pages for what's safe to make public
+      def self.public_pages(pages)
+        pages
+          .select { |p| p['root'] }
+          .reject { |p| p['hidden'] && (p['slug'] != '' || p['external'] == true) }
+          .map do |page|
+            page = page.select { |key| PAGE_KEYS.include?(key) }
+
+            page['children'] = page['children']
+                               .reject { |p| p['hidden'] }
+                               .map { |child| child.select { |key| PAGE_KEYS.include?(key) } }
+                               .sort_by { |p| p['weight'] }
+
+            page
+          end
+          .sort_by { |p| p['weight'] }
       end
     end
   end
