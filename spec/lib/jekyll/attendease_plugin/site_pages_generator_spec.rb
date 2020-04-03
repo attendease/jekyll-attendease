@@ -23,6 +23,15 @@ RSpec.describe Jekyll::AttendeasePlugin::SitePagesGenerator do
       expect(File.exists?(file)).to eq(true)
       expect(File.file?(file)).to eq(true)
     end
+
+    it 'parses mappable placeholders' do
+      slug = page['slug']
+      file = File.join(site.config['destination'], slug, 'index.json')
+      require 'pry'
+      json = JSON.parse(File.read(file))
+      expect(json['dropzone1'][0]['content']['text']).to eq('Hello world')
+      expect(json['dropzone1'][0]['preferences']['foo']).to eq('Hello world')
+    end
   end
 
   context 'page with XSS' do

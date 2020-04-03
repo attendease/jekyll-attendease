@@ -83,7 +83,7 @@ RSpec.configure do |config|
         'has_rooms'                => true,
         'has_filters'              => true,
         'has_venues'               => true,
-        'has_mappable'             => false,
+        'has_mappable'             => true,
         'environment'              => 'test',
         'locale'                   => 'en',
         'source_id'                => 'foobar',

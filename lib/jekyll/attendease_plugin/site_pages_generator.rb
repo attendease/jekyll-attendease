@@ -2,6 +2,7 @@ module Jekyll
   module AttendeasePlugin
     class SitePagesGenerator < Generator
       safe true
+      PLACEHOLDER_REGEX = /\{\{/.freeze
 
       # site.config:
       #    Is where you can find the configs generated for your site
@@ -34,7 +35,7 @@ module Jekyll
                   end
 
                   unless site.data['mappable'].nil? || site.data['mappable'].empty?
-                    perform_substitution!(i['content'], 'mappable' => site.data['mappable'])
+                    perform_substitution!(i, 'mappable' => site.data['mappable'])
                   end
                 end
 
@@ -86,7 +87,7 @@ module Jekyll
       end
 
       def placeholder?(object)
-        object.is_a?(String) && !object.match(/\{\{/).nil?
+        object.is_a?(String) && object =~ PLACEHOLDER_REGEX
       end
 
       def render_with_substitutions(template_string, substitution_lookup)

@@ -170,10 +170,11 @@
                 "id": 6,
                 "component": "AttendeaseBlockHeading",
                 "content": {
-                    "text": "Hello world"
+                    "text": "{{ mappable.foo }}"
                 },
                 "preferences": {
-                    "heading": "h1"
+                    "heading": "h1",
+                    "foo": "{{ mappable.foo }}"
                 },
                 "weight": 0,
                 "zone": "dropzone1"
