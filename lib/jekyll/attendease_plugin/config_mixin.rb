@@ -18,4 +18,8 @@ module AttendeaseJekyllConfigMixin
   def live_mode?
     !!attendease['live_mode']
   end
+
+  def private_site?
+    !!attendease['private_site']
+  end
 end

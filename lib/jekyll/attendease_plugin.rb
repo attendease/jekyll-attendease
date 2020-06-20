@@ -33,6 +33,7 @@ require 'jekyll/attendease_plugin/sponsors_index_page'
 require 'jekyll/attendease_plugin/venues_index_page'
 require 'jekyll/attendease_plugin/venue_page'
 require 'jekyll/attendease_plugin/site_page'
+require 'jekyll/attendease_plugin/site_page_data'
 
 # Ve.rs.ion
 require 'jekyll/attendease_plugin/version'
